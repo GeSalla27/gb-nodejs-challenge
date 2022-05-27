@@ -3,3 +3,9 @@ allOf:
   - type: object
     title: UserInputSchema
     description: User schema for creating users
+
+required:
+  - full_name
+  - cpf
+  - email
+  - password

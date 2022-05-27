@@ -94,6 +94,11 @@ components:
         - type: object
           title: PurchaseInputSchema
           description: Purchase schema for creating purchases
+      required:
+        - code
+        - value
+        - date
+        - cpf
     PurchaseResponse:
       allOf:
         - $ref: '#/components/schemas/PurchaseInput/allOf/0'
@@ -200,6 +205,11 @@ components:
         - type: object
           title: UserInputSchema
           description: User schema for creating users
+      required:
+        - full_name
+        - cpf
+        - email
+        - password
     UnprocessableUserEntityError:
       title: Unprocessable user
       type: object
