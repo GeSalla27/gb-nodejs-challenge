@@ -3,10 +3,10 @@
 > **Requisitos back-end**
 >
 > Rota para cadastrar um novo revendedor(a)
-Rota para validar um login
-Rota para cadastrar uma nova compra
-Rota para listar as compras
-Rota para exibir o acumulado de cashback
+> Rota para validar um login
+> Rota para cadastrar uma nova compra
+> Rota para listar as compras
+> Rota para exibir o acumulado de cashback
 
 <br>
 
