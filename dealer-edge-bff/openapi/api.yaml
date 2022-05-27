@@ -1,0 +1,57 @@
+openapi: 3.0.3
+info:
+  title: GB Node.js Challenge
+  description: >
+    Challenge I reseller O Boticário
+  version: 0.1.0
+tags:
+  - name: Auth
+    description: Auth operations
+  - name: Purchases
+    description: Purchase operations
+  - name: Users
+    description: User operations
+servers:
+  - url: http://localhost:{port}/
+    description: Development server
+    variables:
+      port:
+        default: '3001'
+        description: The port your development server is running.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    LoginInput:
+      $ref: ./schemas/auth/login-input-schema.yaml
+    LoginResponse:
+      $ref: ./schemas/auth/login-response-schema.yaml
+    UserResponse:
+      $ref: ./schemas/users/user-response-schema.yaml
+    PurchaseInput:
+      $ref: ./schemas/purchases/purchase-input-schema.yaml
+    PurchaseResponse:
+      $ref: ./schemas/purchases/purchase-response-schema.yaml
+    PurchaseCashBackResponse:
+      $ref: ./schemas/purchases/purchase-cash-back-response-schema.yaml
+    AccumulatedCashBackResponse:
+      $ref: ./schemas/purchases/purchase-cash-back-response-schema.yaml
+    UserInput:
+      $ref: ./schemas/users/user-input-schema.yaml
+    UnprocessableUserEntityError:
+      $ref: ./schemas/users/unprocessable-user-entity-error-schema.yaml
+    UnprocessablePurchaseEntityError:
+      $ref: ./schemas/purchases/unprocessable-purchase-entity-error-schema.yaml
+
+paths:
+  /auth:
+    $ref: ./paths/auth/index.yaml
+  /purchases:
+    $ref: ./paths/purchases/index.yaml
+  /purchases/accumulated-cash-back:
+    $ref: ./paths/purchases~1accumulated-cash-back/index.yaml
+  /users:
+    $ref: ./paths/users/index.yaml

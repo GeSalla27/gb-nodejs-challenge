@@ -1,0 +1,20 @@
+title: Unprocessable purchase
+type: object
+description: Representation of an unprocessable purchase entity error
+properties:
+  statusCode:
+    type: string
+    example: 422
+  error:
+    type: string
+    example: 'Unprocessable Entity'
+  message:
+    type: array
+    items:
+      type: object
+      properties:
+        target:
+          type: object
+        property:
+          type: string
+          example: 'code'

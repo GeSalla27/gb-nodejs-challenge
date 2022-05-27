@@ -1,0 +1,20 @@
+title: user
+type: object
+description: Base representation of a user
+properties:
+  full_name:
+    type: string
+    example: 'Joana Doe'
+    description: Name of user
+  cpf:
+    type: string
+    description: Cpf of user
+    example: '03613198485'
+  email:
+    type: string
+    description: Email of user
+    example: 'joana.doe@gmai.com'
+  password:
+    type: string
+    description: Password of user
+    example: 'Senha@123'

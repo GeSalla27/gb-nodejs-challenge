@@ -1,0 +1,21 @@
+title: purchase
+type: object
+description: Base representation of a purchase
+properties:
+  code:
+    type: string
+    example: 'L6bmSmDE'
+    description: Code of purchase
+  value:
+    type: number
+    description: Value of purchase
+    example: 200
+  date:
+    type: string
+    format: datetime
+    description: Date of purchase
+    example: '2022-05-26T18:34:32Z'
+  cpf:
+    type: string
+    description: Cpf of purchase
+    example: '03651198070'

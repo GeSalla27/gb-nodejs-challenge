@@ -1,0 +1,5 @@
+allOf:
+  - $ref: ./user-base-schema.yaml
+  - type: object
+    title: UserInputSchema
+    description: User schema for creating users

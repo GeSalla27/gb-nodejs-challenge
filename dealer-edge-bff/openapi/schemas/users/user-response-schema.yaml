@@ -1,0 +1,19 @@
+allOf:
+  - $ref: ./user-base-schema.yaml
+  - type: object
+    title: UserResponseSchema
+    description: User schema that is returned by our api
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 4d13575f-64a1-4fd4-b96b-19a6e354388a
+      full_name:
+        type: string
+        example: 'Joana Doe'
+      cpf:
+        type: string
+        example: '03613198485'
+      email:
+        type: string
+        example: 'joana.doe@gmai.com'

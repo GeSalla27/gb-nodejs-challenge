@@ -1,0 +1,11 @@
+summary: Find a purchases
+operationId: findPurchases
+tags:
+  - Purchases
+responses:
+  200:
+    description: Returns the purchases response list with cash back
+    content:
+      application/json:
+        schema:
+          $ref: ../../../schemas/purchases/purchase-cash-back-response-schema.yaml

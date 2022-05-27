@@ -1,0 +1,5 @@
+allOf:
+  - $ref: ./purchase-base-schema.yaml
+  - type: object
+    title: PurchaseInputSchema
+    description: Purchase schema for creating purchases

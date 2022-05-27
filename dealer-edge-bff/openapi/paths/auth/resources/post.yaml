@@ -1,0 +1,17 @@
+summary: Login user
+operationId: AuthUser
+description: Auth user
+tags:
+  - Auth
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ../../../schemas/auth/user-login-schema.yaml
+responses:
+  200:
+    description: Returns the login user
+    content:
+      application/json:
+        schema:
+          $ref: ../../../schemas/auth/login-response-schema.yaml

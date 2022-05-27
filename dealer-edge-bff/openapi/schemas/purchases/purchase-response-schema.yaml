@@ -1,0 +1,39 @@
+allOf:
+  - $ref: ./purchase-base-schema.yaml
+  - type: object
+    title: PurchaseResponseSchema
+    description: Purchase schema that is returned by our api
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 4d13575f-64a1-4fd4-b96b-19a6e354388a
+      code:
+        type: string
+        example: 'L6bmSmDE'
+      value:
+        type: number
+        description: Value of purchase
+        example: 200
+      date:
+        type: string
+        format: datetime
+        description: Date of purchase
+        example: '2022-05-26T18:34:32Z'
+      cpf:
+        type: string
+        description: Cpf of purchase
+        example: '03651198070'
+      user_id:
+        type: string
+        format: uuid
+        example: 4d13575f-64a1-4fd4-b96b-19a6e354388a
+      status:
+        type: string
+        example: IN_VALIDATION
+        enum:
+          - IN_VALIDATION
+          - APPROVED
+        description: |
+          * `IN_VALIDATION`: Em validação
+          * `APPROVED`: Aprovado

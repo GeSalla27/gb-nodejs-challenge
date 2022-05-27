@@ -1,0 +1,6 @@
+title: UserLoginSchema
+type: object
+description: Representation of a user login
+properties:
+  user:
+    $ref: ./login-input-schema.yaml

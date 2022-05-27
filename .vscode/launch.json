@@ -1,0 +1,41 @@
+{
+  // Use o IntelliSense para saber mais sobre os atributos possíveis.
+  // Focalizar para exibir as descrições dos atributos existentes.
+  // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "sourceMaps": true,
+      "name": "dealer-edge-bff",
+      "port": 9009,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/dealer-edge-bff",
+      "remoteRoot": "/app/",
+      "restart": true
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "sourceMaps": true,
+      "name": "user-core",
+      "port": 9008,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/user-core",
+      "remoteRoot": "/app/",
+      "restart": true
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "sourceMaps": true,
+      "name": "purchase-core",
+      "port": 9010,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/purchase-core",
+      "remoteRoot": "/app/",
+      "restart": true
+    },
+  ]
+}

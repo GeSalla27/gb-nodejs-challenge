@@ -1,0 +1,11 @@
+summary: Find accumulated cash back purchases
+operationId: findAccumulatedCashBack
+tags:
+  - Purchases
+responses:
+  200:
+    description: Returns the accumulated cash back purchases response list
+    content:
+      application/json:
+        schema:
+          $ref: ../../../schemas/purchases/purchase-cash-back-response-schema.yaml

@@ -1,0 +1,9 @@
+title: LoginReponseSchema
+type: object
+description: Representation of a reponse login
+properties:
+  user:
+    $ref: ../users/user-response-schema.yaml
+  access_token:
+    type: string
+    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvZ2Vyb25pbm9Ab3V0bG9vay5jb20iLCJpYXQiOjE2NTIyMDQyNjIsImV4cCI6MTY1MjIwNDMyMiwidXNlcl9pZCI6IjRkMTM1NzVmLTY0YTEtNGZkNC1iOTZiLTE5YTZlMzU0Mzg4YSJ9.FzeSpEwYSLVXawy8lV-RrUf1rpMkUrxfZCxAna3LjPM

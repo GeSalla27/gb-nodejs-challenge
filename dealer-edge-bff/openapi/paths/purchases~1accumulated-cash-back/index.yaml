@@ -1,0 +1,5 @@
+get:
+  security:
+  - bearerAuth: []
+  $ref: './resources/get.yaml'
+

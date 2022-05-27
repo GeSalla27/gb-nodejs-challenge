@@ -1,0 +1,12 @@
+title: LoginInput
+type: object
+description: Login input
+properties:
+  email:
+    type: string
+    example: "emailTeste@outlokk.com"
+    description: E-mail of user
+  password:
+    type: string
+    example: "Senhaforte@123"
+    description: Password of user

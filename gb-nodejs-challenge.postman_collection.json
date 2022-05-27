@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "287c52ef-58d4-4888-a580-a1e6e396587d",
+		"name": "Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17044665"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"Joana Silva\",\n    \"cpf\": \"03651198070\",\n    \"email\": \"joanasilva@gmail.com\",\n    \"password\": \"Teste@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlDealer}}/users",
+							"host": [
+								"{{baseUrlDealer}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const { access_token } = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.environment.set('access_token', access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"joanasilva@gmail.com\",\n    \"password\": \"Teste@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlDealer}}/auth/login",
+							"host": [
+								"{{baseUrlDealer}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Purchase",
+			"item": [
+				{
+					"name": "Add purchase",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"L6bmSmDE\",\r\n    \"value\": 250,\r\n    \"date\": \"2022-05-26T15:48:29.561Z\",\r\n    \"cpf\": \"03651198070\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlDealer}}/purchases",
+							"host": [
+								"{{baseUrlDealer}}"
+							],
+							"path": [
+								"purchases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user purchases",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlDealer}}/purchases",
+							"host": [
+								"{{baseUrlDealer}}"
+							],
+							"path": [
+								"purchases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get accumulated user cash back",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlDealer}}/purchases/accumulated-cash-back",
+							"host": [
+								"{{baseUrlDealer}}"
+							],
+							"path": [
+								"purchases",
+								"accumulated-cash-back"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

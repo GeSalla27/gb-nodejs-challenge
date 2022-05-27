@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  node:
+    hostname: dealer-edge-bff-node
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+      args:
+        - USER_ID=${USER_ID:-1000}
+        - GROUP_ID=${GROUP_ID:-1000}
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: dealer-edge-bff-node/node:latest
+    ports:
+      - "${NODE_HOST_PORT:-3000}:${PORT:-3000}"
+      - "${NODE_HOST_DEBUG_PORT:-9229}:9229"
+    networks:
+      - main
+      - services
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+    command: npm run start:debug
+
+networks:
+  main:
+    driver: bridge
+  services:
+    name: services
+    external: true

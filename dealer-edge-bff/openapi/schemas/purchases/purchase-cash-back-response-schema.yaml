@@ -1,0 +1,38 @@
+allOf:
+  - type: object
+    title: PurchaseResponseSchema
+    description: Purchase schema that is returned by our api
+    properties:
+      code:
+        type: string
+        example: 'L6bmSmDE'
+      purchase_value:
+        type: number
+        description: Value of purchase
+        example: 200
+      date:
+        type: string
+        format: datetime
+        description: Date of purchase
+        example: '2022-05-26T18:34:32Z'
+      cash_back_percentage:
+        type: string
+        description: Percentage of cash back
+        example: '03651198070'
+      cash_back_value:
+        type: number
+        description: Value of cash back
+        example: 20
+      status:
+        type: string
+        example: IN_VALIDATION
+        enum:
+          - IN_VALIDATION
+          - APPROVED
+        description: |
+          * `IN_VALIDATION`: Em validação
+          * `APPROVED`: Aprovado
+      amount_month:
+        type: number
+        description: Amount value of purchase in the month
+        example: 200

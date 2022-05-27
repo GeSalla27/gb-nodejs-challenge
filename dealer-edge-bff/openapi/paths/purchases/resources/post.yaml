@@ -1,0 +1,25 @@
+summary: Create a purchase
+operationId: AddPurchase
+description: Add a new purchase
+tags:
+  - Purchases
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ../../../schemas/purchases/purchase-input-schema.yaml
+responses:
+  201:
+    description: Returns the created purchase
+    content:
+      application/json:
+        schema:
+          $ref: ../../../schemas/purchases/purchase-response-schema.yaml
+  409:
+    description: There is a purchase with this id
+  422:
+    description: Error in some of the parameters sent
+    content:
+      application/json:
+        schema:
+          $ref: ../../../schemas/purchases/unprocessable-purchase-entity-error-schema.yaml

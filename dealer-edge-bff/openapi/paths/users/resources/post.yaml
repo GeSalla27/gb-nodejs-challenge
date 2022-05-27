@@ -1,0 +1,25 @@
+summary: Create a user
+operationId: AddUser
+description: Add a new user
+tags:
+  - Users
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ../../../schemas/users/user-input-schema.yaml
+responses:
+  201:
+    description: Returns the created user
+    content:
+      application/json:
+        schema:
+          $ref: ../../../schemas/users/user-response-schema.yaml
+  409:
+    description: There is a user with this email
+  422:
+    description: Error in some of the parameters sent
+    content:
+      application/json:
+        schema:
+          $ref: ../../../schemas/users/unprocessable-user-entity-error-schema.yaml

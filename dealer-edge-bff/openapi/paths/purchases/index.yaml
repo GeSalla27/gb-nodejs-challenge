@@ -1,0 +1,9 @@
+post:
+  security:
+  - bearerAuth: []
+  $ref: './resources/post.yaml'
+get:
+  security:
+  - bearerAuth: []
+  $ref: './resources/get.yaml'
+

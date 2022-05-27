@@ -1,0 +1,364 @@
+openapi: 3.0.3
+info:
+  title: GB Node.js Challenge
+  description: |
+    Challenge I reseller O Boticário
+  version: 0.1.0
+tags:
+  - name: Auth
+    description: Auth operations
+  - name: Purchases
+    description: Purchase operations
+  - name: Users
+    description: User operations
+servers:
+  - url: 'http://localhost:{port}/'
+    description: Development server
+    variables:
+      port:
+        default: '3001'
+        description: The port your development server is running.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    LoginInput:
+      title: LoginInput
+      type: object
+      description: Login input
+      properties:
+        email:
+          type: string
+          example: emailTeste@outlokk.com
+          description: E-mail of user
+        password:
+          type: string
+          example: Senhaforte@123
+          description: Password of user
+    LoginResponse:
+      title: LoginReponseSchema
+      type: object
+      description: Representation of a reponse login
+      properties:
+        user:
+          $ref: '#/components/schemas/UserResponse'
+        access_token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvZ2Vyb25pbm9Ab3V0bG9vay5jb20iLCJpYXQiOjE2NTIyMDQyNjIsImV4cCI6MTY1MjIwNDMyMiwidXNlcl9pZCI6IjRkMTM1NzVmLTY0YTEtNGZkNC1iOTZiLTE5YTZlMzU0Mzg4YSJ9.FzeSpEwYSLVXawy8lV-RrUf1rpMkUrxfZCxAna3LjPM
+    UserResponse:
+      allOf:
+        - $ref: '#/components/schemas/UserInput/allOf/0'
+        - type: object
+          title: UserResponseSchema
+          description: User schema that is returned by our api
+          properties:
+            id:
+              type: string
+              format: uuid
+              example: 4d13575f-64a1-4fd4-b96b-19a6e354388a
+            full_name:
+              type: string
+              example: Joana Doe
+            cpf:
+              type: string
+              example: 03613198485
+            email:
+              type: string
+              example: joana.doe@gmai.com
+    PurchaseInput:
+      allOf:
+        - title: purchase
+          type: object
+          description: Base representation of a purchase
+          properties:
+            code:
+              type: string
+              example: L6bmSmDE
+              description: Code of purchase
+            value:
+              type: number
+              description: Value of purchase
+              example: 200
+            date:
+              type: string
+              format: datetime
+              description: Date of purchase
+              example: '2022-05-26T18:34:32Z'
+            cpf:
+              type: string
+              description: Cpf of purchase
+              example: 03651198070
+        - type: object
+          title: PurchaseInputSchema
+          description: Purchase schema for creating purchases
+    PurchaseResponse:
+      allOf:
+        - $ref: '#/components/schemas/PurchaseInput/allOf/0'
+        - type: object
+          title: PurchaseResponseSchema
+          description: Purchase schema that is returned by our api
+          properties:
+            id:
+              type: string
+              format: uuid
+              example: 4d13575f-64a1-4fd4-b96b-19a6e354388a
+            code:
+              type: string
+              example: L6bmSmDE
+            value:
+              type: number
+              description: Value of purchase
+              example: 200
+            date:
+              type: string
+              format: datetime
+              description: Date of purchase
+              example: '2022-05-26T18:34:32Z'
+            cpf:
+              type: string
+              description: Cpf of purchase
+              example: 03651198070
+            user_id:
+              type: string
+              format: uuid
+              example: 4d13575f-64a1-4fd4-b96b-19a6e354388a
+            status:
+              type: string
+              example: IN_VALIDATION
+              enum:
+                - IN_VALIDATION
+                - APPROVED
+              description: |
+                * `IN_VALIDATION`: Em validação
+                * `APPROVED`: Aprovado
+    PurchaseCashBackResponse:
+      allOf:
+        - type: object
+          title: PurchaseResponseSchema
+          description: Purchase schema that is returned by our api
+          properties:
+            code:
+              type: string
+              example: L6bmSmDE
+            purchase_value:
+              type: number
+              description: Value of purchase
+              example: 200
+            date:
+              type: string
+              format: datetime
+              description: Date of purchase
+              example: '2022-05-26T18:34:32Z'
+            cash_back_percentage:
+              type: string
+              description: Percentage of cash back
+              example: 03651198070
+            cash_back_value:
+              type: number
+              description: Value of cash back
+              example: 20
+            status:
+              type: string
+              example: IN_VALIDATION
+              enum:
+                - IN_VALIDATION
+                - APPROVED
+              description: |
+                * `IN_VALIDATION`: Em validação
+                * `APPROVED`: Aprovado
+            amount_month:
+              type: number
+              description: Amount value of purchase in the month
+              example: 200
+    AccumulatedCashBackResponse:
+      $ref: '#/components/schemas/PurchaseCashBackResponse'
+    UserInput:
+      allOf:
+        - title: user
+          type: object
+          description: Base representation of a user
+          properties:
+            full_name:
+              type: string
+              example: Joana Doe
+              description: Name of user
+            cpf:
+              type: string
+              description: Cpf of user
+              example: 03613198485
+            email:
+              type: string
+              description: Email of user
+              example: joana.doe@gmai.com
+            password:
+              type: string
+              description: Password of user
+              example: Senha@123
+        - type: object
+          title: UserInputSchema
+          description: User schema for creating users
+    UnprocessableUserEntityError:
+      title: Unprocessable user
+      type: object
+      description: Representation of an unprocessable user entity error
+      properties:
+        statusCode:
+          type: string
+          example: 422
+        error:
+          type: string
+          example: Unprocessable Entity
+        message:
+          type: array
+          items:
+            type: object
+            properties:
+              target:
+                type: object
+              property:
+                type: string
+                example: name
+              children:
+                type: array
+                items:
+                  type: string
+              constraints:
+                type: object
+                properties:
+                  isEnum:
+                    type: string
+                    example: name must be a valid string
+    UnprocessablePurchaseEntityError:
+      title: Unprocessable purchase
+      type: object
+      description: Representation of an unprocessable purchase entity error
+      properties:
+        statusCode:
+          type: string
+          example: 422
+        error:
+          type: string
+          example: Unprocessable Entity
+        message:
+          type: array
+          items:
+            type: object
+            properties:
+              target:
+                type: object
+              property:
+                type: string
+                example: code
+paths:
+  /auth:
+    post:
+      summary: Login user
+      operationId: AuthUser
+      description: Auth user
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: UserLoginSchema
+              type: object
+              description: Representation of a user login
+              properties:
+                user:
+                  $ref: '#/components/schemas/LoginInput'
+      responses:
+        '200':
+          description: Returns the login user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /purchases:
+    post:
+      security:
+        - bearerAuth: []
+      summary: Create a purchase
+      operationId: AddPurchase
+      description: Add a new purchase
+      tags:
+        - Purchases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInput'
+      responses:
+        '201':
+          description: Returns the created purchase
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '409':
+          description: There is a purchase with this id
+        '422':
+          description: Error in some of the parameters sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessablePurchaseEntityError'
+    get:
+      security:
+        - bearerAuth: []
+      summary: Find a purchases
+      operationId: findPurchases
+      tags:
+        - Purchases
+      responses:
+        '200':
+          description: Returns the purchases response list with cash back
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseCashBackResponse'
+  /purchases/accumulated-cash-back:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Find accumulated cash back purchases
+      operationId: findAccumulatedCashBack
+      tags:
+        - Purchases
+      responses:
+        '200':
+          description: Returns the accumulated cash back purchases response list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseCashBackResponse'
+  /users:
+    post:
+      summary: Create a user
+      operationId: AddUser
+      description: Add a new user
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: Returns the created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '409':
+          description: There is a user with this email
+        '422':
+          description: Error in some of the parameters sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableUserEntityError'
