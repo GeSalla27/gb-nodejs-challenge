@@ -3,3 +3,9 @@ allOf:
   - type: object
     title: PurchaseInputSchema
     description: Purchase schema for creating purchases
+    
+required:
+  - code
+  - value
+  - date
+  - cpf
