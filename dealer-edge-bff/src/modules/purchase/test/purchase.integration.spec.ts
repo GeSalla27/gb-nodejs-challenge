@@ -101,10 +101,10 @@ describe("PurchaseIntegration", () => {
   );
 
   describe("getUserPurchasesCashBack", () => {
-    it("Should return user purchase cash back", async () => {
+    it("Should return user purchase cashback", async () => {
       const purchaseCashBackResponseSchemaHelper =
         PurchaseCashBackResponseSchemaHelper.createPlain();
-      const url = `${baseUrl.concat("/cash-back")}`;
+      const url = `${baseUrl.concat("/cashback")}`;
       const response = AxiosTestHelper.createAxiosResponse(
         HttpStatus.OK,
         purchaseCashBackResponseSchemaHelper
@@ -132,12 +132,13 @@ describe("PurchaseIntegration", () => {
   });
 
   describe("getAccumulatedUserCashBack", () => {
-    it("Should return accumulated user cash back", async () => {
+    it("Should return accumulated user cashback", async () => {
       const accumulatedCashBackResponseSchemaHelper =
         AccumulatedCashBackResponseSchemaHelper.createPlain();
       const body = { body: accumulatedCashBackResponseSchemaHelper };
       const userCpf = "03651198070";
-      const url = PurchaseIntegration.getIntegrationBoticarioUrl();
+      const url =
+        PurchaseIntegration.getIntegrationBoticarioUrl().concat("/cashback");
       const response = AxiosTestHelper.createAxiosResponse(HttpStatus.OK, body);
 
       const headers = {
