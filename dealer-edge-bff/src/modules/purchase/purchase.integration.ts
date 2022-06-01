@@ -22,7 +22,7 @@ export class PurchaseIntegration {
   }
 
   static getIntegrationBoticarioUrl(): string {
-    return "https://mdaqk8ek5j.execute-api.us-east-1.amazonaws.com/v1/cashback";
+    return "https://mdaqk8ek5j.execute-api.us-east-1.amazonaws.com/v1";
   }
 
   async create(
@@ -71,8 +71,9 @@ export class PurchaseIntegration {
     userCpf: string
   ): Promise<AccumulatedCashBackResponseSchema> {
     const filters = { cpf: userCpf };
+
     const observable = this.httpService.get(
-      PurchaseIntegration.getIntegrationBoticarioUrl(),
+      PurchaseIntegration.getIntegrationBoticarioUrl().concat("/cashback"),
       {
         headers: { Authorization: "Bearer ZXPURQOARHiMc6Y0flhRC1LVlZQVFRnm" },
         params: filters,
