@@ -56,7 +56,7 @@ export class PurchaseIntegration {
     filters: PurchaseListQueryType
   ): Promise<PurchaseCashBackResponseSchema[]> {
     const observable = this.httpService.get(
-      `${PurchaseIntegration.getPurchaseBaseUrlCore().concat("/cash-back")}`,
+      `${PurchaseIntegration.getPurchaseBaseUrlCore().concat("/cashback")}`,
       {
         params: filters,
       }

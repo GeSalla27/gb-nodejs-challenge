@@ -26,7 +26,7 @@ export class PurchaseController {
     return this.purchaseService.find(purchaseListQuerySchema);
   }
 
-  @Get("cash-back")
+  @Get("cashback")
   @TransformPlainToClass(PurchaseCashBackResponseSchema)
   getUserPurchasesCashBack(
     @Query() purchaseListQuerySchema: PurchaseListQuerySchema

@@ -3,7 +3,6 @@ import {
   ConflictException,
   HttpStatus,
   Injectable,
-  UnauthorizedException,
   UnprocessableEntityException,
 } from "@nestjs/common";
 import { firstValueFrom } from "rxjs";
