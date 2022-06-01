@@ -137,25 +137,16 @@ export class PurchaseService {
   async getUserPurchasesCashBack(
     params: PurchaseListQuerySchema
   ): Promise<PurchaseCashBackResponseSchema[]> {
-    const months: string[] = [];
-
     this.logger.info("Finding cash back purchases");
 
     const purchasesFinded = await this.purchaseRepository.find(params);
-
-    let lastPurchaseMonth: string;
-
     const amountPurchaseMonth = purchasesFinded
       // eslint-disable-next-line no-nested-ternary
       .sort((a, b) => (a.date > b.date ? 1 : b.date > a.date ? -1 : 0))
       .map((purchase) => {
-        const month = `${purchase.date.getMonth() + 1}`;
-        const year = `${purchase.date.getFullYear()}`;
-        const monthYear = month.concat(year);
-        if (lastPurchaseMonth !== monthYear) {
-          lastPurchaseMonth = monthYear;
-          months.push(lastPurchaseMonth);
-        }
+        const monthYear = `${purchase.date.getMonth() + 1}`.concat(
+          `${purchase.date.getFullYear()}`
+        );
 
         return {
           id: purchase.id,
@@ -163,11 +154,13 @@ export class PurchaseService {
           value: purchase.value,
           date: purchase.date,
           status: purchase.status,
-          month_year: lastPurchaseMonth,
+          month_year: monthYear,
         };
       });
 
     await Promise.all(amountPurchaseMonth);
+
+    this.logger.info("Applying cash back purchases");
 
     return PurchaseService.returnSchemaPurchaseCashBack(amountPurchaseMonth);
   }
